@@ -248,6 +248,7 @@ func g1[T, U any, V interface{}, W Foo[Bar[T]]](a Foo[T]) {}
 func g1[T, U any, V interface{}, W Foo[Bar[T]]](a Foo[T]) {}
 func g2(a foo.bar[int]) {}
 func f[A int|string, B ~int, C ~int|~string]()
+func f() {int, map[int]int}
 
 --------------------------------------------------------------------------------
 
@@ -383,7 +384,24 @@ func f[A int|string, B ~int, C ~int|~string]()
         (ERROR
           (identifier))
         (type_identifier)))
-    (parameter_list)))
+    (parameter_list))
+  (function_declaration
+    (identifier)
+    (parameter_list
+      (parameter_declaration
+        (identifier)
+        (type_identifier))
+      (parameter_declaration
+        (identifier)
+        (identifier)
+        (identifier)
+        (type_identifier)))
+    (parameter_list
+      (parameter_declaration
+        (type_identifier))
+      (parameter_declaration
+        (type_identifier)))
+    (block)))
 
 ================================================================================
 Single-line function declarations
